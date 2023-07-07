@@ -1,3 +1,4 @@
+
 // // src/components/rtl-provider.js
 
 // import { CacheProvider } from '@emotion/react'
@@ -18,4 +19,5 @@
 //   const dir = locale == 'ar' ? 'rtl' : 'ltr'
 //   const cache = createCache(options[dir])
 //   return <CacheProvider value={cache} children={children} />
+
 // }

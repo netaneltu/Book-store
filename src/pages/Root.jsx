@@ -1,3 +1,4 @@
+
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
 import Nav from "../components/Nav";
@@ -15,3 +16,4 @@ function Root() {
 }
 
 export default Root;
+
