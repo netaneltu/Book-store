@@ -8,7 +8,7 @@ function Root() {
 
   return (
     <>
-      <Nav />
+{/*       <Nav /> */}
       <Outlet />
     </>
   );
