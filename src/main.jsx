@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     domain="dev-ncmxh7hsp8x7tc0c.us.auth0.com"
     clientId="zlKtLeATSfGX1cdlfPSNZMGQ6O7FxNa6"
     authorizationParams={{
-      redirect_uri: "http://localhost:5173/Dashboard",
+      redirect_uri: "https://book-store-c7d27.web.app/dashboard",
     }}
   >
     <React.StrictMode>
