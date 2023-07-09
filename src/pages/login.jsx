@@ -1,4 +1,3 @@
-
 import {
   VStack,
   Heading,
@@ -17,7 +16,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import axios from "axios";
-import LoginButton from "../components/Auth0"
+import LoginButton from "../components/Auth0";
 
 import { useCookies } from "react-cookie";
 import { useState } from "react";
@@ -94,7 +93,6 @@ const login = () => {
       // setLoggedManager(data.manager);
       setCookie("token", data.token, { path: "/", maxAge: 10800 });
 
-      
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -154,10 +152,10 @@ const login = () => {
                   {message}
                 </Text>
               )}
-              <LoginButton>log in</LoginButton>
             </SimpleGrid>
           </form>
         </FormControl>
+        <LoginButton/>
       </VStack>
     </Container>
   );
