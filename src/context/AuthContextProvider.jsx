@@ -1,7 +1,7 @@
-
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+
 export const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
@@ -25,7 +25,6 @@ function AuthContextProvider({ children }) {
             },
           }
         );
-
         setManager(data.manager);
         setCookie("token", data.token, { path: "/", maxAge: 10800 });
       } catch (error) {
@@ -36,8 +35,8 @@ function AuthContextProvider({ children }) {
     if (cookies.token) {
       authManager();
     }
-  }, []);
-
+  }, [cookies.token]);
+  console.log(valueToShare);
   return (
     <AuthContext.Provider value={valueToShare}>{children}</AuthContext.Provider>
   );

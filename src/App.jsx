@@ -12,16 +12,18 @@ import Root from "./pages/Root";
 import Login from "./pages/login";
 import Dashboard from "./pages/Dashboard";
 import { ChakraProvider } from "@chakra-ui/react";
+import PrivateRoutes from "./utils/PrivateRoutes";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Root />}>
       <Route index element={<Login />} />
-      <Route path="dashboard" element={<Dashboard />} />
+      
 
-      {/* <Route element={<PriveateRoutes />}> */}
-      {/* <Route path="dashboard" element={<Dashboard />} /> */}
-      {/* </Route> */}
+      <Route element={<PrivateRoutes />}>
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route>
     </Route>
   )
 );

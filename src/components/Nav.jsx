@@ -1,4 +1,3 @@
-
 import {
   Box,
   Flex,
@@ -20,6 +19,7 @@ import { BsFillPersonFill, BsEnvelopeAtFill } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import { Link as rl } from "react-router-dom";
+import LogoutButton from "./Auth0_logout";
 
 const Nav = () => {
   // const { manager, setManager } = useContext(AuthContext);
@@ -78,34 +78,38 @@ const Nav = () => {
         justifyContent="center"
         gap={5}
         padding={4}
-        bg="#DEB887"
+        bg="#E3CEAD"
         color="white"
         display={[isOpen ? "flex" : "none", "flex", "flex"]}
         direction={["row-reverse", "row", "row"]}
         mt={[20, 0, 0]}
       >
         <Box as={rl} to="/home" justifyContent="center" boxSize="5rem">
-          <Image src="../../public/open-book.png" />
+          <Image src="../../open-book.png" />
         </Box>
-        <Box w={[100, 300, 400]} maxW="30rem">
+        <Box w={[100, 400, 600]} maxW="30rem">
           <Input
+          borderRadius={20}
             borderColor="gray.800"
-            borderWidth={2}
+            p={6}
             color="black"
-            placeholder="מה תרצו לקנות?"
+            placeholder=" מה תרצו לקנות היום?"
           />
         </Box>
         <Box as="button" onClick={logFun}>
-          <BiSearchAlt size="2rem"></BiSearchAlt>
+          <BiSearchAlt color="black" size="2rem"></BiSearchAlt>
         </Box>
         <Box as={rl} to="/account">
-          <BsFillPersonFill size="2rem"></BsFillPersonFill>
+          <BsFillPersonFill color="black" size="2rem"></BsFillPersonFill>
         </Box>
         <Box as={rl} to="/cart">
-          <AiOutlineShoppingCart size="2rem"></AiOutlineShoppingCart>
+          <AiOutlineShoppingCart color="black" size="2rem"></AiOutlineShoppingCart>
         </Box>
         <Box as={rl} to="/mail">
-          <BsEnvelopeAtFill size="2rem"></BsEnvelopeAtFill>
+          <BsEnvelopeAtFill color="black" size="2rem"></BsEnvelopeAtFill>
+        </Box>
+        <Box>
+          <LogoutButton />
         </Box>
       </Flex>
     </div>
@@ -113,4 +117,3 @@ const Nav = () => {
 };
 
 export default Nav;
-

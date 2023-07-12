@@ -5,11 +5,11 @@ import Nav from "../components/Nav";
 import { AuthContext } from "../context/AuthContextProvider";
 
 function Root() {
-  // const { manager } = useContext(AuthContext);
+  const { manager } = useContext(AuthContext);
 
   return (
     <>
-      {/* <Nav /> */}
+      {manager && <Nav />}
       <Outlet />
     </>
   );

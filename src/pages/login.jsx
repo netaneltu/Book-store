@@ -9,6 +9,7 @@ import {
   Input,
   Button,
   Link,
+  Spinner,
   Container,
   FormErrorMessage,
   FormHelperText,
@@ -16,22 +17,26 @@ import {
   Center,
 } from "@chakra-ui/react";
 import axios from "axios";
-import LoginButton from "../components/Auth0";
-
+import LoginButton from "../components/Auth0_login";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContextProvider";
 import { useCookies } from "react-cookie";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 const emailregex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 const passwordregex = /^(?=.*[A-Z]).{6,12}$$/;
 
 const login = () => {
+  const { manager, setManager } = useContext(AuthContext);
   const [enterdName, setEnteredName] = useState("");
   const [enterdPassword, setEnteredPassword] = useState("");
   const [emailIsError, setEmailIsError] = useState(false);
   const [passwordIsError, setPasswordIsErrorr] = useState(false);
   const [message, setMessage] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [loading, setLoading] = useState(false);
 
   // password validation
   const passwordInputChangeHandler = (event) => {
@@ -72,6 +77,7 @@ const login = () => {
   }, [emailIsError, passwordIsError]);
 
   const submithandler = async (e) => {
+    setLoading(true);
     e.preventDefault();
     setEnteredName(email.value);
     setEnteredPassword(password.value);
@@ -90,14 +96,20 @@ const login = () => {
         }
       );
       const data = response.data;
+      setManager(data.manager);
+      setMessage("success to login");
       // setLoggedManager(data.manager);
-      setCookie("token", data.token, { path: "/", maxAge: 10800 });
-
-      console.log(data);
+      setCookie("token", data.access_token, { path: "/", maxAge: 10800 });
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
+  console.log(manager);
+  if (manager) {
+    return <Navigate to="dashboard" />;
+  }
   return (
     <Container borderRadius={20} mt={20} p={15}>
       <VStack
@@ -150,12 +162,22 @@ const login = () => {
               {(emailIsError || passwordIsError || Error) && (
                 <Text fontSize="md" color="red">
                   {message}
+                  {loading && (
+                    <Spinner
+                      alignSelf="center"
+                      thickness="4px"
+                      speed="0.65s"
+                      emptyColor="gray.200"
+                      color="blue.500"
+                      size="md"
+                    />
+                  )}
                 </Text>
               )}
             </SimpleGrid>
           </form>
         </FormControl>
-        <LoginButton/>
+        <LoginButton />
       </VStack>
     </Container>
   );
