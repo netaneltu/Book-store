@@ -12,7 +12,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { ImMenu } from "react-icons/im";
 import { toast } from "react-toastify";
-import { AuthContext } from "../context/AuthContextProvider";
+import { AuthContext } from "../../context/AuthContextProvider";
 import { useCookies } from "react-cookie";
 import { BiSearchAlt } from "react-icons/bi";
 import { BsFillPersonFill, BsEnvelopeAtFill } from "react-icons/bs";
@@ -20,7 +20,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import { Link as rl } from "react-router-dom";
 
-const Nav = () => {
+const ManagerNav = () => {
   // const { manager, setManager } = useContext(AuthContext);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
@@ -78,7 +78,7 @@ const Nav = () => {
         gap={5}
         padding={4}
         bg="#E8DBC9"
-        color="white"
+        color="black"
         display={[isOpen ? "flex" : "none", "flex", "flex"]}
         direction={["row-reverse", "row", "row"]}
         mt={[20, 0, 0]}
@@ -86,31 +86,35 @@ const Nav = () => {
         <Box as={rl} to="/home" justifyContent="center" boxSize="5rem">
           <Image src="../../public/open-book.png" />
         </Box>
-        <Box w={[100, 400, 600]} maxW="30rem">
-          <Input
-            borderColor="gray.800"
-            borderWidth={1}
-            borderRadius={30}
-            color="black"
-            p={7}
-            placeholder="מה תרצו לקנות היום?"
-          />
+        <Box>
+          <Link href="/products">מוצרים</Link>
         </Box>
-        <Box as="button" onClick={logFun}>
-          <BiSearchAlt color="black" size="2rem"></BiSearchAlt>
+        <Box>
+          <Link href="/products/add">הוסף מוצר</Link>
         </Box>
+        <Box>
+          <Link href="/categoties"> קטגוריות</Link>
+        </Box>
+        <Box>
+          <Link href="/categoties/add">הוסף קטגוריה</Link>
+        </Box>
+        <Box>
+          <Link href="/users">משתמשים</Link>
+        </Box>
+        <Box>
+          <Link href="/orders">הזמנות</Link>
+        </Box>
+
         <Box as={rl} to="/account">
-          <BsFillPersonFill color="black" size="2rem"></BsFillPersonFill>
+          <BsFillPersonFill size="2rem"></BsFillPersonFill>
         </Box>
-        <Box as={rl} to="/cart">
-          <AiOutlineShoppingCart color="black" size="2rem"></AiOutlineShoppingCart>
-        </Box>
+
         <Box as={rl} to="/mail">
-          <BsEnvelopeAtFill color="black" size="2rem"></BsEnvelopeAtFill>
+          <BsEnvelopeAtFill size="2rem"></BsEnvelopeAtFill>
         </Box>
       </Flex>
     </div>
   );
 };
 
-export default Nav;
+export default ManagerNav;
