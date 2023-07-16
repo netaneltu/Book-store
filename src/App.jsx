@@ -15,7 +15,8 @@ import Products from "./pages/private/Products/Products";
 import Orders from "./pages/private/Orders/Orders";
 import Users from "./pages/private/Users/Users";
 import AddProduct from "./pages/private/Products/AddProduct";
-import Caterogies from "./pages/private/Categories/Categories";
+import AddCategory from "./pages/private/Categories/AddCategory";
+import Categories from "./pages/private/Categories/Categories";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import PriveateRoutes from "./utils/PrivateRoutes";
@@ -33,8 +34,9 @@ const router = createBrowserRouter(
           <Route path="/products/add" element={<AddProduct />} />
         </Route>
 
-        <Route path="categoties">
-          <Route element={<Caterogies />} />
+        <Route path="categories">
+          <Route index element={<Categories />} />
+          <Route path="/categories/add" element={<AddCategory />} />
         </Route>
 
         <Route path="users">

@@ -93,10 +93,10 @@ const ManagerNav = () => {
           <Link href="/products/add">הוסף מוצר</Link>
         </Box>
         <Box>
-          <Link href="/categoties"> קטגוריות</Link>
+          <Link href="/categories"> קטגוריות</Link>
         </Box>
         <Box>
-          <Link href="/categoties/add">הוסף קטגוריה</Link>
+          <Link href="/categories/add">הוסף קטגוריה</Link>
         </Box>
         <Box>
           <Link href="/users">משתמשים</Link>
