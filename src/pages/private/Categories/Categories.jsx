@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import CategoriesTable from "../../../components/Partial/categories/CtegoriesTable";
 
 const Categories = () => {
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const getAllCategories = async () => {
@@ -34,7 +34,6 @@ const Categories = () => {
     };
     getAllCategories();
   }, []);
-console.log(categories);
   return (
     <>
       <Container
@@ -43,7 +42,7 @@ console.log(categories);
         minH="70vh"
       >
         <Heading mb="10px">רשימת קטגוריות</Heading>
-        <CategoriesTable CategoriesData={categories} />
+        <CategoriesTable categoriesData={categories} />
       </Container>
     </>
   );
