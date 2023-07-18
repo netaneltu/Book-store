@@ -12,6 +12,10 @@ import {
   TableCaption,
   Heading,
   TableContainer,
+  HStack,
+  Wrap,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -40,13 +44,18 @@ const CategoriesTable = ({ categoriesData }) => {
     } catch (error) {}
   };
 
+  const HandelEditCategory=()=>{
+    console.log("edit category")
+    
+  }
+
   return (
     <>
       <TableContainer>
-        <Table variant="striped" colorScheme="teal">
+        <Table variant="striped" colorScheme="blackAlpha">
           <Thead>
             <Tr>
-              <Th>שם הקטגוריה</Th>
+              <Th fontSize={20}>שם הקטגוריה</Th> 
             </Tr>
           </Thead>
           <Tbody>
@@ -54,19 +63,22 @@ const CategoriesTable = ({ categoriesData }) => {
               return (
                 <Tr key={category._id}>
                   <Td>{category.category_name}</Td>
+                  <Flex w={100}>
                   <Td>
                     <Button
                       onClick={() => {
                         handleDeleteCategory(category._id);
                       }}
-                    >
+                    bg={"red.300"}>
                       DELETE🗑
                     </Button>
                   </Td>
                   <Td>
-                    <Button>EDIT🖊</Button>
+                    <Button  onClick={() => {
+                        HandelEditCategory(category._id);
+                      }} bg={"blue.300"}>EDIT🖊</Button>
                   </Td>
-                  <Td></Td>
+                  </Flex>
                 </Tr>
               );
             })}
