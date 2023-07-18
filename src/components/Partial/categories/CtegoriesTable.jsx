@@ -20,9 +20,11 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CategoriesTable = ({ categoriesData }) => {
   const [categories, setCategories] = useState([...categoriesData]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setCategories([...categoriesData]);
@@ -44,18 +46,13 @@ const CategoriesTable = ({ categoriesData }) => {
     } catch (error) {}
   };
 
-  const HandelEditCategory=()=>{
-    console.log("edit category")
-    
-  }
-
   return (
     <>
       <TableContainer>
         <Table variant="striped" colorScheme="blackAlpha">
           <Thead>
             <Tr>
-              <Th fontSize={20}>שם הקטגוריה</Th> 
+              <Th fontSize={20}>שם הקטגוריה</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -64,20 +61,28 @@ const CategoriesTable = ({ categoriesData }) => {
                 <Tr key={category._id}>
                   <Td>{category.category_name}</Td>
                   <Flex w={100}>
-                  <Td>
-                    <Button
-                      onClick={() => {
-                        handleDeleteCategory(category._id);
-                      }}
-                    bg={"red.300"}>
-                      DELETE🗑
-                    </Button>
-                  </Td>
-                  <Td>
-                    <Button  onClick={() => {
-                        HandelEditCategory(category._id);
-                      }} bg={"blue.300"}>EDIT🖊</Button>
-                  </Td>
+                    <Td>
+                      <Button
+                        onClick={() => {
+                          handleDeleteCategory(category._id);
+                        }}
+                        bg={"red.300"}
+                      >
+                        DELETE🗑
+                      </Button>
+                    </Td>
+                    <Td>
+                      <Button
+                        onClick={() => {
+                          navigate("/categories/edit", {
+                            state: category.category_name,
+                          });
+                        }}
+                        bg={"blue.300"}
+                      >
+                        EDIT🖊
+                      </Button>
+                    </Td>
                   </Flex>
                 </Tr>
               );

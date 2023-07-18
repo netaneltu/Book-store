@@ -52,9 +52,6 @@ const ManagerNav = () => {
     }
   };
 
-  const logFun = () => {
-    console.log("hi");
-  };
 
   return (
     <div>

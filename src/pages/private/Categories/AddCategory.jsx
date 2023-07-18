@@ -1,6 +1,5 @@
 import { Container } from "@chakra-ui/react";
 import React, { useState } from "react";
-import AddProductForm from "../../../components/Partial/products/AddProductForm";
 import { Helmet } from "react-helmet";
 import AddCategoryForm from "../../../components/Partial/categories/AddCategoryForm";
 
