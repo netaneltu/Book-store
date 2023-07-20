@@ -75,7 +75,7 @@ const CategoriesTable = ({ categoriesData }) => {
                       <Button
                         onClick={() => {
                           navigate("/categories/edit", {
-                            state: category.category_name,
+                            state: category._id,
                           });
                         }}
                         bg={"blue.300"}
