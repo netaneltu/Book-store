@@ -10,20 +10,21 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-const EditCategoryForm = (categoryData) => {
-  console.log(categoryData.categoryData._id);
+const EditCategoryForm = ( categoryData) => {
+  console.log(categoryData.categoryId);
   const [categoryName, setCategoryName] = useState(null);
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
-    console.log(categoryData.categoryData.category_name);
     e.preventDefault();
     try {
       const response = await axios.put(
         `${
           import.meta.env.VITE_SERVER_URL
-        }/categories/managers/update-category/${categoryData.categoryData._id}`,
+        }/categories/managers/update-category/${categoryData.categoryId}`,
         { category_name: categoryName }
-      );
+        );
+        setMessage("שם הקטגוריה שונה")
     } catch (error) {
       console.log(error.response);
     }
@@ -40,12 +41,13 @@ const EditCategoryForm = (categoryData) => {
           }}
           id="category_name"
           my="20px"
-          placeholder={categoryName}
+          placeholder={categoryData.categoryData}
           aria-label="input for category name"
         />
         <Button type="submit" colorScheme="teal">
           ערוך קטגוריה
         </Button>
+        { message && (<p>{message}</p>) }
       </Box>
     </>
   );

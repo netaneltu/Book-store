@@ -14,7 +14,7 @@ const AddProduct = () => {
       </Helmet>
 
       <Container
-        maxW={["98%", "87%", "80%", "70%", "45%"]}
+        maxW={["98%", "87%", "80%", "70%"]}
         mt={["10vh", "10vh", "3vh"]}
         minH="70vh"
       >
