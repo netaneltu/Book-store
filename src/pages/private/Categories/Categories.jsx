@@ -15,9 +15,16 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import CategoriesTable from "../../../components/Partial/categories/CtegoriesTable";
 
 const Categories = () => {
+  <Helmet>
+  <meta charSet="utf-8" />
+  <title>Add Category</title>
+  <meta name="description" content="categoris" />
+</Helmet>
+
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {

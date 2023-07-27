@@ -15,10 +15,18 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import CategoriesTable from "../../../components/Partial/categories/CtegoriesTable";
+import { Helmet } from "react-helmet";
+import ProductsTable from "../../../components/Partial/products/ProductsTable";
 
 const products = () => {
+  <Helmet>
+  <meta charSet="utf-8" />
+  <title>Add Category</title>
+  <meta name="description" content="products" />
+</Helmet>
+
   const [products, setProducts] = useState([]);
+  
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -27,12 +35,15 @@ const products = () => {
           `${import.meta.env.VITE_SERVER_URL}/products/managers/all`
         );
         setProducts(data.products);
+        console.log(data.products);
       } catch (error) {
         console.log(error);
       }
     };
     getAllProducts();
   }, []);
+
+  
   return (
     <>
       <Container
@@ -41,7 +52,7 @@ const products = () => {
         minH="70vh"
       >
         <Heading mb="10px">רשימת מוצרים</Heading>
-        <ProductsTable productsData={products} />
+        <ProductsTable  productsData={products } />
       </Container>
     </>
   );

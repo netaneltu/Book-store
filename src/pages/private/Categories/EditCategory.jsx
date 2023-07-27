@@ -7,6 +7,12 @@ import { Container } from "@chakra-ui/react";
 import EditCategoryForm from "../../../components/Partial/categories/EditCategoryForm ";
 
 const EditCategory = () => {
+  <Helmet>
+  <meta charSet="utf-8" />
+  <title>Add Category</title>
+  <meta name="description" content="edit category  " />
+</Helmet>
+
   const { state } = useLocation();
 
   const [categoryData, setCategoryData] = useState(null);
