@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { RiEditLine,RiDeleteBin6Line } from "react-icons/ri";
 
 const ProductsTable = ({ productsData }) => {
   console.log(productsData);
@@ -58,9 +59,9 @@ const ProductsTable = ({ productsData }) => {
                         onClick={() => {
                           handleDeleteProduct(product._id);
                         }}
-                        bg={"red.300"}
+                        leftIcon={<RiDeleteBin6Line />} colorScheme='red' variant='solid'
                       >
-                        DELETE🗑
+                        DELETE
                       </Button>
                     </Td>
                     <Td>
@@ -70,9 +71,9 @@ const ProductsTable = ({ productsData }) => {
                             state: product._id,
                           });
                         }}
-                        bg={"blue.300"}
+                        leftIcon={<RiEditLine />} colorScheme={'blue'} variant='solid'
                       >
-                        EDIT🖊
+                        EDIT
                       </Button>
                     </Td>
                   </Flex>

@@ -21,7 +21,7 @@ import {
   TagLabel,
   TagCloseButton,
   AlertIcon,
-  Alert
+  Alert,
 } from "@chakra-ui/react";
 // import { ChevronDownIcon } from '@chakra-ui/icons'
 
@@ -33,15 +33,13 @@ const AddProductForm = ({ categoriesData }) => {
     product_name: "",
     product_description: "",
     product_price: "",
-    product_image: "",
+    product_image: [],
     categories: [],
   });
   const [message, setMessage] = useState();
   const [messageStatus, setMessageStatus] = useState();
-  
 
   const handleChangeCategory = (e) => {
-    
     const obj = JSON.parse(e.target.value);
     const check = values.categories.some((c) => c.id == obj.id);
 
@@ -57,16 +55,23 @@ const AddProductForm = ({ categoriesData }) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      const base64String = reader.result;
-      setValues({ ...values, product_image: base64String });
-    };
-    reader.readAsDataURL(file);
-    console.log(reader.result);
+    const files = event.target.files;
+    console.log(files);
+    let file;
+    let base64String = [];
+    for (let i = 0; i < files.length; i++) {
+      let reader = new FileReader();
+      file = files[i];
+      console.log(file);
+      reader.onloadend = (file) => {
+        base64String[i] = reader.result;
+        console.log(base64String);
+        setValues({ ...values, product_image: base64String });
+      };
+      reader.readAsDataURL(file);
+    }
   };
+  console.log(values.product_image);
   const submithandler = async (e) => {
     e.preventDefault();
     try {
@@ -81,26 +86,25 @@ const AddProductForm = ({ categoriesData }) => {
         }
       );
 
-      setMessage("המוצר נוסף בהצלחה!")
-      setMessageStatus("success")
+      setMessage("המוצר נוסף בהצלחה!");
+      setMessageStatus("success");
     } catch (error) {
       console.log(error.response);
-      setMessageStatus("error")
-      setMessage("אנא מלא את כל הפרטים של המוצר")
+      setMessageStatus("error");
+      setMessage("אנא מלא את כל הפרטים של המוצר");
     }
   };
-  const clearInput=()=>{
+  const clearInput = () => {
     setValues({
       product_name: "",
-    product_description: "",
-    product_price: "",
-    product_image: "",
-    categories: [],
-    })
+      product_description: "",
+      product_price: "",
+      product_image: [],
+      categories: [],
+    });
     document.getElementById("myForm").reset();
-    setMessage(null)
-
-  }
+    setMessage(null);
+  };
   console.log(values.categories);
   return (
     <>
@@ -155,22 +159,32 @@ const AddProductForm = ({ categoriesData }) => {
                     placeholder="הזן מחיר המוצר"
                   />
                 </GridItem>
-
-                <GridItem colSpan={1}>
+                <FormLabel> תמונות של המוצר</FormLabel>
+                <HStack>
+                  {values.product_image.map((image) => {
+                    return (
+                      <GridItem colSpan={1}>
+                        <Image boxSize="90px" src={image} />
+                      </GridItem>
+                    );
+                  })}
+                </HStack>
+                {/* <GridItem colSpan={1}>
                   {values.product_image && (
-                    <Image boxSize="80px" src={values.product_image} />
+                    <Image boxSize="80px" src={values.product_image[0]} />
                   )}
-                  <FormLabel> תמונה של המוצר</FormLabel>
-                  <Input
-                    id="product_image"
-                    my="20px"
-                    type="file"
-                    variant="filled"
-                    aria-label="input for product image"
-                    onChange={handleFileChange}
-                  />
-                </GridItem>
-                
+                  </GridItem> */}
+                <Input
+                  id="product_image"
+                  my="20px"
+                  type="file"
+                  variant="filled"
+                  multiple
+                  aria-label="input for product image"
+                  onChange={handleFileChange}
+                />
+                {/* </GridItem> */}
+
                 {values.categories.length ? (
                   <>
                     <Heading fontSize="lg">קטגוריות שנבחרו: </Heading>
@@ -186,31 +200,33 @@ const AddProductForm = ({ categoriesData }) => {
                             colorScheme="blackAlpha"
                           >
                             <TagLabel>{c.name}</TagLabel>
-                            <TagCloseButton onClick={() => {
-                      const updatedSelectedCategories =
-                        values.categories.filter((category) => {
-                          return category.id !== c.id;
-                        });
+                            <TagCloseButton
+                              onClick={() => {
+                                const updatedSelectedCategories =
+                                  values.categories.filter((category) => {
+                                    return category.id !== c.id;
+                                  });
 
-                      setValues({
-                        ...values,
-                        categories: updatedSelectedCategories,
-                      });
-                    }} />
+                                setValues({
+                                  ...values,
+                                  categories: updatedSelectedCategories,
+                                });
+                              }}
+                            />
                           </Tag>
                         );
                       })}
                     </HStack>
                   </>
                 ) : (
-                  <Text>no categories</Text>
+                  <Text> לא נבחרו קטגוריות</Text>
                 )}
 
                 <Select
                   onChange={handleChangeCategory}
                   mb="15px"
                   id="select_category"
-                  placeholder="Select category"
+                  placeholder="בחר קטגוריה"
                 >
                   {categoriesData.map((category) => {
                     return (
@@ -234,11 +250,15 @@ const AddProductForm = ({ categoriesData }) => {
                 >
                   הוסף מוצר
                 </Button>
-               {message==="המוצר נוסף בהצלחה!" ? <Button onClick={clearInput}>הוסף מוצר נוסף</Button>  :null }
-               { message && <Alert status={messageStatus}>
-              <AlertIcon />
-               {message}
-                </Alert> }
+                {message === "המוצר נוסף בהצלחה!" ? (
+                  <Button onClick={clearInput}>הוסף מוצר נוסף</Button>
+                ) : null}
+                {message && (
+                  <Alert status={messageStatus}>
+                    <AlertIcon />
+                    {message}
+                  </Alert>
+                )}
               </SimpleGrid>
             </form>
           </FormControl>

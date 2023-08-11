@@ -21,6 +21,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { RiEditLine,RiDeleteBin6Line } from "react-icons/ri";
 
 const CategoriesTable = ({ categoriesData }) => {
   const [categories, setCategories] = useState([...categoriesData]);
@@ -66,9 +67,9 @@ const CategoriesTable = ({ categoriesData }) => {
                         onClick={() => {
                           handleDeleteCategory(category._id);
                         }}
-                        bg={"red.300"}
+                        leftIcon={<RiDeleteBin6Line />} colorScheme='red' variant='solid'
                       >
-                        DELETE🗑
+                        DELETE
                       </Button>
                     </Td>
                     <Td>
@@ -78,9 +79,9 @@ const CategoriesTable = ({ categoriesData }) => {
                             state: category._id,
                           });
                         }}
-                        bg={"blue.300"}
+                        leftIcon={<RiEditLine />} colorScheme={'blue'} variant='solid'
                       >
-                        EDIT🖊
+                        EDIT
                       </Button>
                     </Td>
                   </Flex>

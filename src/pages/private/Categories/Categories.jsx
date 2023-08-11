@@ -11,6 +11,7 @@ import {
   TableCaption,
   Heading,
   TableContainer,
+  Center,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
@@ -20,10 +21,10 @@ import CategoriesTable from "../../../components/Partial/categories/CtegoriesTab
 
 const Categories = () => {
   <Helmet>
-  <meta charSet="utf-8" />
-  <title>Add Category</title>
-  <meta name="description" content="categoris" />
-</Helmet>
+    <meta charSet="utf-8" />
+    <title>Add Category</title>
+    <meta name="description" content="categoris" />
+  </Helmet>;
 
   const [categories, setCategories] = useState([]);
 
@@ -34,7 +35,6 @@ const Categories = () => {
           `${import.meta.env.VITE_SERVER_URL}/categories/managers/all`
         );
         setCategories(data.categories);
-        
       } catch (error) {
         console.log(error);
       }
@@ -44,7 +44,8 @@ const Categories = () => {
   return (
     <>
       <Container
-        maxW={["98%", "87%", "80%", "70%", "45%"]}
+        // centerContent
+        maxW={["95%", "87%", "80%"]}
         mt={["10vh", "10vh", "3vh"]}
         minH="70vh"
       >
