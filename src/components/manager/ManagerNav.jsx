@@ -1,57 +1,36 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Link,
-  Button,
-  Image,
-  Input,
-  IconButton,
-} from "@chakra-ui/react";
+import { Box, Flex, Link, Button, Image, Input } from "@chakra-ui/react";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ImMenu } from "react-icons/im";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthContextProvider";
 import { useCookies } from "react-cookie";
-import { BiSearchAlt } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 import { BsFillPersonFill, BsEnvelopeAtFill } from "react-icons/bs";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import { Link as rl } from "react-router-dom";
 
 const ManagerNav = () => {
   // const { manager, setManager } = useContext(AuthContext);
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies("token");
 
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/users/managers/logout`
-      );
-
-      toast.success(data.message, {
-        position: "top-center",
-        autoClose: 2000,
-        theme: "light",
-      });
-
-      setTimeout(() => {
-        removeCookie("token");
-        setManager(null);
-      }, 3000);
+        `${import.meta.env.VITE_SERVER_URL}/users/managers/logout`,
+        {
+         cookies:JSON.stringify(cookies) 
+        },
+        );
+      
+      removeCookie("token", { path: "/" });
+      console.log("hi");
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.error, {
-        position: "top-center",
-        autoClose: 2000,
-        theme: "light",
-      });
     }
   };
-
 
   return (
     <div>
@@ -108,6 +87,9 @@ const ManagerNav = () => {
 
         <Box as={rl} to="/mail">
           <BsEnvelopeAtFill size="2rem"></BsEnvelopeAtFill>
+        </Box>
+        <Box as="button" onClick={handleLogout}>
+          <BiLogOut size="2rem"></BiLogOut>
         </Box>
       </Flex>
     </div>

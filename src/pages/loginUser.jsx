@@ -31,7 +31,7 @@ const passwordregex = /^(?=.*[A-Z]).{6,12}$$/;
 
 const login = () => {
   const [enterdName, setEnteredName] = useState("");
-  const { manager, setManager } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [enterdPassword, setEnteredPassword] = useState("");
   const [emailIsError, setEmailIsError] = useState(false);
   const [passwordIsError, setPasswordIsErrorr] = useState(false);
@@ -90,26 +90,25 @@ const login = () => {
       }
 
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/users/managers/login`,
+        `${import.meta.env.VITE_SERVER_URL}/users/customers/login`,
         {
-          manager_email: enterdName,
-          manager_password: enterdPassword,
+          email: enterdName,
+          password: enterdPassword,
         }
       );
       const data = response.data;
-      // setLoggedManager(data.manager);
+      // setLoggedUser(data.user);
       setCookie("token", data.access_token, { path: "/", maxAge: 10800 });
 
       console.log(data);
     } catch (error) {
       console.log(error);
-      setMessage(error.response.data.error)
     } finally {
       setLoading(false);
     }
   };
-  if (manager) {
-    return <Navigate to="dashboard" />;
+  if (user) {
+    return <Navigate to="home" />;
   }
 
   return (

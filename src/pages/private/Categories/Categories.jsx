@@ -26,21 +26,21 @@ const Categories = () => {
     <meta name="description" content="categoris" />
   </Helmet>;
 
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const getAllCategories = async () => {
-      try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_SERVER_URL}/categories/managers/all`
-        );
-        setCategories(data.categories);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAllCategories();
-  }, []);
+  // useEffect(() => {
+  //   const getAllCategories = async () => {
+  //     try {
+  //       const { data } = await axios.get(
+  //         `${import.meta.env.VITE_SERVER_URL}/categories/managers/all`
+  //       );
+  //       setCategories(data.categories);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getAllCategories();
+  // }, []);
   return (
     <>
       <Container
@@ -50,7 +50,7 @@ const Categories = () => {
         minH="70vh"
       >
         <Heading mb="10px">רשימת קטגוריות</Heading>
-        <CategoriesTable categoriesData={categories} />
+        <CategoriesTable  />
       </Container>
     </>
   );

@@ -24,7 +24,7 @@ function AuthContextProvider({ children }) {
             },
           }
         );
-
+        console.log(data);
         setManager(data.manager);
         setCookie("token", data.token, { path: "/", maxAge: 10800 });
       } catch (error) {
@@ -36,7 +36,7 @@ function AuthContextProvider({ children }) {
       authManager();
     }
   }, [cookies.token]);
-
+console.log(valueToShare);
   return (
     <AuthContext.Provider value={valueToShare}>{children}</AuthContext.Provider>
   );

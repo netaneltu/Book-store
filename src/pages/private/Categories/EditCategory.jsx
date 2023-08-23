@@ -17,22 +17,7 @@ const EditCategory = () => {
 
   const [categoryData, setCategoryData] = useState(null);
 
-  useEffect(() => {
-    const getCategoryById = async () => {
-      try {
-        const { data } = await axios.get(
-          `${
-            import.meta.env.VITE_SERVER_URL
-          }/categories/managers/get-by-id/${state}`
-        );
-        console.log(data);
-        setCategoryData(data.category.category_name);
-      } catch (e) {
-        console.log("error");
-      }
-    };
-    getCategoryById();
-  }, []);
+  
   return (
     <>
       <Helmet>
