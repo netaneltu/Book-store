@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { MultiSelect } from "chakra-multiselect";
 
 import {
   FormLabel,
@@ -22,12 +20,16 @@ import {
   TagCloseButton,
   AlertIcon,
   Alert,
+  Textarea,
 } from "@chakra-ui/react";
-// import { ChevronDownIcon } from '@chakra-ui/icons'
-
+import allSubCategoris from "../../../hooks/allSubCategoris";
+import allCategoris from "../../../hooks/allCategoris";
 import axios from "axios";
 
 const AddProductForm = ({ categoriesData }) => {
+  const allSubCategorisArray = allSubCategoris();
+  const allCategorisArray = allCategoris();
+
   console.log(categoriesData);
   const [values, setValues] = useState({
     product_name: "",
@@ -39,14 +41,33 @@ const AddProductForm = ({ categoriesData }) => {
   const [message, setMessage] = useState();
   const [messageStatus, setMessageStatus] = useState();
 
+  // useEffect(() => {
+  //   const addingParentCategory = () => {
+  //     allCategorisArray.map((cat) => {
+  //       for (let i = 0; i < cat.subcategories.length; i++) {
+  //         if (values.categories[0].name === cat.subcategories[i].name) {
+  //           values.categories.push(cat.subcategories[i])
+  //           console.log("hi");
+  //         }
+  //         console.log(values.categories);
+  //       }
+  //     });
+  //   };
+  //   addingParentCategory();
+  // }, [values.categories]);
+
   const handleChangeCategory = (e) => {
     const obj = JSON.parse(e.target.value);
     const check = values.categories.some((c) => c.id == obj.id);
+    console.log(obj);
 
     if (!check) {
       setValues({
         ...values,
-        categories: [...values.categories, { id: obj.id, name: obj.name }],
+        categories: [
+          ...values.categories,
+          { id: obj.id, name: obj.name, parent: obj.parent },
+        ],
       });
     }
   };
@@ -136,9 +157,10 @@ const AddProductForm = ({ categoriesData }) => {
                     // isInvalid={emailIsError}
                   />
                 </GridItem>
-                <GridItem colSpan={1}>
+                <GridItem height="100px" colSpan={1}>
                   <FormLabel>תיאור המוצר</FormLabel>
-                  <Input
+                  <Textarea
+                    height="80px"
                     onChange={handleChangeInput}
                     type="text"
                     id="product_description"
@@ -228,13 +250,14 @@ const AddProductForm = ({ categoriesData }) => {
                   id="select_category"
                   placeholder="בחר קטגוריה"
                 >
-                  {categoriesData.map((category) => {
+                  {allSubCategorisArray.map((category) => {
                     return (
                       <option
                         key={category._id}
                         value={JSON.stringify({
                           id: category._id,
                           name: category.category_name,
+                          parent: category.parent_category,
                         })}
                       >
                         {category.category_name}

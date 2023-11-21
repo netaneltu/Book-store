@@ -18,6 +18,7 @@ import {
   Box,
   Center,
   Button,
+  Text
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -91,8 +92,8 @@ const CategoriesTable = () => {
               console.log(category);
               return (
                 <>
-                  <Tr key={category._id}>
-                    <Td fontSize={20}>{category.category_name}</Td>
+                  <Tr  key={category._id}>
+                    <Td fontSize={25}><Text as='u' >{category.category_name}</Text></Td>
 
                     <Flex w={100}>
                       <Td>
@@ -130,13 +131,13 @@ const CategoriesTable = () => {
                       </Td>
                     </Flex>
                   </Tr>
-                  <Table mr="30px">
-                    <Flex w={100}>
+                    <Flex  w={100}>
+                  <Table mr="40px">
                       {category.subcategories.map((sub_c) => {
                         return (
                           <>
                             <Tr>
-                              <Td mr="10px" fontSize={15}>
+                              <Td mr="15px" fontSize={15}>
                                 {sub_c.category_name}
                               </Td>
                               <Td>
@@ -159,8 +160,8 @@ const CategoriesTable = () => {
                           </>
                         );
                       })}
-                    </Flex>
                   </Table>
+                    </Flex>
                 </>
               );
             })}

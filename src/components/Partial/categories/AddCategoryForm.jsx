@@ -13,8 +13,11 @@ import {
   Alert
 } from "@chakra-ui/react";
 import axios from "axios";
+import allSubCategoris from "../../../hooks/allSubCategoris";
 
 const AddCategoryForm = () => {
+  const allSubCategorisArray=allSubCategoris()
+  console.log(allSubCategorisArray);
   const [categoryName, setCategoryName] = useState("");
   const [message, setMessage] = useState();
   const [categories, setCategories] = useState([]);
@@ -52,6 +55,8 @@ console.log(categories);
         c.category_name==categoryName
       )
 
+     
+
       if(!check){
         const response = await axios.post(
           `${import.meta.env.VITE_SERVER_URL}/categories/managers/add-category`,
@@ -74,12 +79,12 @@ console.log(categories);
   const handleSubmitSubCat = async (e) => {
     e.preventDefault();
     try {
-      // const check= categories.subcategories.some((c)=>
-      // c.category_name==subCategoryName
-      // )
-      console.log("hi");
-
-      // if(!check){
+      const subCheck=allSubCategorisArray.some((c)=>
+        c.category_name==subCategoryName
+      )
+      console.log(subCategoryName);
+//if(!subCheck && !check){
+      if(!subCheck){
         const response = await axios.post(
           `${import.meta.env.VITE_SERVER_URL}/categories/managers/add-subcategory`,
           {  parent_category:categoryName,
@@ -87,9 +92,9 @@ console.log(categories);
         );
         setMessage("קטגוריה נוספה בהצלחה");
         setMessageStatus("success");
-      // }
-      // else{setMessage("קטגוריה כבר קיימת");
-      // setMessageStatus("error");}
+      }
+      else{setMessage("קטגוריה כבר קיימת");
+      setMessageStatus("error");}
       
     } catch (error) {
       console.log(error.response);

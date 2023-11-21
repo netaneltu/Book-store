@@ -4,6 +4,17 @@ import axios from "axios";
 const allSubCategoris = () => {
   const [subCategories, setSubCategories] = useState([]);
 
+
+const compare=(a,b)=>{
+   if ( a.category_name < b.category_name ){
+    return -1;
+  }
+  if ( a.category_name > b.category_name ){
+    return 1;
+  }
+  return 0;
+
+}
   useEffect(() => {
    const getAllSubCategoris = async () => {
       try {
@@ -18,7 +29,11 @@ setSubCategories(data.subcategories);
     };
     getAllSubCategoris()
   }, []);
+  
+  subCategories.sort(compare)
+  
   console.log(subCategories);
+
   return subCategories;
 };
 

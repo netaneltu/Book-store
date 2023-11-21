@@ -20,15 +20,19 @@ import {
   Input,
   Button,
   Heading,
+  Textarea ,
   Box,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect } from "react";
+import allSubCategoris from "../../../hooks/allSubCategoris";
+
 
 const EditProductForm = (productId) => {
   console.log(productId.productData);
   
-  
+  const allSubCategorisArray= allSubCategoris()
+
   
   const [values, setValues] = useState({
     product_name: "",
@@ -169,21 +173,25 @@ const EditProductForm = (productId) => {
                       // isInvalid={emailIsError}
                     />
                   </GridItem>
-                  <GridItem colSpan={1}>
+                  <GridItem  colSpan={1}>
                     <FormLabel>תיאור המוצר</FormLabel>
-                    <Input
+                    <Textarea
+                    h="100px"  
                       onChange={handleChangeInput}
                       type="text"
                       id="product_description"
                       name="product_description"
                       variant="filled"
                       value={values.product_description}
+                      class="product_description"
+                      
                       // isInvalid={emailIsError}
                     />
                   </GridItem>
                   <GridItem colSpan={1}>
                     <FormLabel>מחיר המוצר</FormLabel>
                     <Input
+                    
                       onChange={handleChangeInput}
                       type="number"
                       id="product_price"
@@ -261,7 +269,7 @@ const EditProductForm = (productId) => {
                     id="select_category"
                     placeholder="בחר קטגוריה"
                   >
-                    {categories.map((category) => {
+                    {allSubCategorisArray.map((category) => {
                       return (
                         <option
                           key={category._id}

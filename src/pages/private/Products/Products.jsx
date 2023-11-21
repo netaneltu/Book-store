@@ -26,6 +26,17 @@ const products = () => {
 </Helmet>
 
   const [products, setProducts] = useState([]);
+
+  const compare=(a,b)=>{
+    if ( a.product_name < b.product_name ){
+     return -1;
+   }
+   if ( a.product_name > b.product_name ){
+     return 1;
+   }
+   return 0;
+ 
+ }
   
 
   useEffect(() => {
@@ -44,6 +55,7 @@ const products = () => {
   }, []);
 
   
+  products.sort(compare)
   return (
     <>
       <Container

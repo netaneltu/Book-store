@@ -25,6 +25,15 @@ const ProductsTable = ({ productsData }) => {
     setProducts([...productsData]);
   }, [productsData]);
 
+  const alertFunction = (id, name) => {
+    if (confirm(`האם אתה בטוח שאתה רוצה למחוק את המוצר ${name} לצמיתות?`)) {
+      handleDeleteProduct(id)
+    } else {
+      console.log("canceled");
+    }
+
+  };
+
   const handleDeleteProduct = async (id) => {
     try {
        axios.delete(
@@ -56,8 +65,12 @@ const ProductsTable = ({ productsData }) => {
                   <Flex w={100}>
                     <Td>
                       <Button
-                        onClick={() => {
-                          handleDeleteProduct(product._id);
+                         onClick={() => {
+                          alertFunction(
+                            product._id,
+                            product.product_name,
+                           
+                          );
                         }}
                         leftIcon={<RiDeleteBin6Line />} colorScheme='red' variant='solid'
                       >
