@@ -9,6 +9,8 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import axios from "axios";
+import logo from "../../public/open-book.png"
+
 import { useContext, useState } from "react";
 import { ImMenu } from "react-icons/im";
 import { toast } from "react-toastify";
@@ -84,7 +86,7 @@ const Nav = () => {
         mt={[20, 0, 0]}
       >
         <Box as={rl} to="/home" justifyContent="center" boxSize="5rem">
-          <Image src="../../public/open-book.png" />
+          <Image src={logo} />
         </Box>
         <Box w={[100, 400, 600]} maxW="30rem">
           <Input
