@@ -41,20 +41,7 @@ const AddProductForm = ({ categoriesData }) => {
   const [message, setMessage] = useState();
   const [messageStatus, setMessageStatus] = useState();
 
-  // useEffect(() => {
-  //   const addingParentCategory = () => {
-  //     allCategorisArray.map((cat) => {
-  //       for (let i = 0; i < cat.subcategories.length; i++) {
-  //         if (values.categories[0].name === cat.subcategories[i].name) {
-  //           values.categories.push(cat.subcategories[i])
-  //           console.log("hi");
-  //         }
-  //         console.log(values.categories);
-  //       }
-  //     });
-  //   };
-  //   addingParentCategory();
-  // }, [values.categories]);
+  
 
   const handleChangeCategory = (e) => {
     const obj = JSON.parse(e.target.value);
@@ -92,7 +79,7 @@ const AddProductForm = ({ categoriesData }) => {
       reader.readAsDataURL(file);
     }
   };
-  console.log(values.product_image);
+  
   const submithandler = async (e) => {
     e.preventDefault();
     try {
