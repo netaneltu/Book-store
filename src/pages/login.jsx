@@ -176,9 +176,9 @@ const login = () => {
                   size="md"
                 />
               )}
+            </SimpleGrid>
               <Text>user name: avib@gmail.com</Text>
               <Text>password: Ee123456</Text>
-            </SimpleGrid>
           </form>
         </FormControl>
       </VStack>
