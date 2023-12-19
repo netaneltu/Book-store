@@ -14,7 +14,7 @@ import logo from "../../public/open-book.png"
 import { useContext, useState } from "react";
 import { ImMenu } from "react-icons/im";
 import { toast } from "react-toastify";
-import { AuthContext } from "../context/AuthContextProvider";
+// import { AuthContext } from "../context/AuthContextProvider";
 import { useCookies } from "react-cookie";
 import { BiSearchAlt } from "react-icons/bi";
 import { BsFillPersonFill, BsEnvelopeAtFill } from "react-icons/bs";
@@ -52,10 +52,6 @@ const Nav = () => {
         theme: "light",
       });
     }
-  };
-
-  const logFun = () => {
-    console.log("hi");
   };
 
   return (
