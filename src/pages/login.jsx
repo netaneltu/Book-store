@@ -103,7 +103,7 @@ const login = () => {
       console.log(data);
     } catch (error) {
       console.log(error);
-      setMessage(error.response.data.error)
+      setMessage(error.response.data.error);
     } finally {
       setLoading(false);
     }
@@ -176,7 +176,8 @@ const login = () => {
                   size="md"
                 />
               )}
-              <LoginButton>log in</LoginButton>
+              <Text>user name: avib@gmail.com</Text>
+              <Text>password: Ee123456</Text>
             </SimpleGrid>
           </form>
         </FormControl>
